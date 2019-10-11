@@ -58,9 +58,43 @@ public class PigHumanPlayer extends GameHumanPlayer implements OnClickListener {
      * @param info
      * 		the message
      */
+
+
+
+
+
     @Override
     public void receiveInfo(GameInfo info) {
-        //TODO You will implement this method to receive state objects from the game
+        if (info instanceof PigGameState) {
+            PigGameState currentGameState = (PigGameState) info;
+            if (currentGameState.getPlayerId() == this.playerNum) {
+
+                int randNum = (int) (Math.random() * 6);
+
+
+
+             if(randNum == 1){
+                 dieImageButton.setImageResource(R.drawable.face1);
+             }else if (randNum == 2){
+                 dieImageButton.setImageResource(R.drawable.face2);
+             }else if (randNum == 3){
+                 dieImageButton.setImageResource(R.drawable.face3);
+             }else if (randNum == 4){
+                 dieImageButton.setImageResource(R.drawable.face4);
+             }else if (randNum == 5){
+                 dieImageButton.setImageResource(R.drawable.face5);
+             }else if (randNum == 6){
+                 dieImageButton.setImageResource(R.drawable.face6);
+             }
+
+            }
+        }
+        flash(Color.RED,2);
+        return;
+
+
+
+
     }//receiveInfo
 
     /**
