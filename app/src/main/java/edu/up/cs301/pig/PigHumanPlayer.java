@@ -71,25 +71,33 @@ public class PigHumanPlayer extends GameHumanPlayer implements OnClickListener {
 
                 int randNum = (int) (Math.random() * 6);
 
-
-
              if(randNum == 1){
                  dieImageButton.setImageResource(R.drawable.face1);
+
              }else if (randNum == 2){
                  dieImageButton.setImageResource(R.drawable.face2);
+
              }else if (randNum == 3){
                  dieImageButton.setImageResource(R.drawable.face3);
+
              }else if (randNum == 4){
                  dieImageButton.setImageResource(R.drawable.face4);
+
              }else if (randNum == 5){
                  dieImageButton.setImageResource(R.drawable.face5);
+
              }else if (randNum == 6){
                  dieImageButton.setImageResource(R.drawable.face6);
+
              }
 
+             this.playerScoreTextView.setText(" " + currentGameState.getPlayer0Score());
+             this.oppScoreTextView.setText(" " + currentGameState.getPlayer1Score());
+             this.turnTotalTextView.setText(" " + currentGameState.getRunningScore());
             }
         }
-        flash(Color.RED,2);
+        flash(Color.RED,1);
+        getTopView().invalidate();
         return;
 
 
@@ -106,6 +114,18 @@ public class PigHumanPlayer extends GameHumanPlayer implements OnClickListener {
      */
     public void onClick(View button) {
         //TODO  You will implement this method to send appropriate action objects to the game
+        if (button == holdButton ) {
+            game.sendAction(new PigHoldAction(this));
+
+        } else if (button == dieImageButton) {
+            game.sendAction(new PigRollAction(this));
+
+        }
+
+
+
+
+
     }// onClick
 
     /**

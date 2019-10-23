@@ -1,10 +1,14 @@
 package edu.up.cs301.pig;
 
+import android.widget.Button;
+import android.widget.ImageButton;
+
 import java.util.ArrayList;
 
 import edu.up.cs301.game.GameMainActivity;
 import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.LocalGame;
+import edu.up.cs301.game.R;
 import edu.up.cs301.game.config.GameConfig;
 import edu.up.cs301.game.config.GamePlayerType;
 
@@ -48,6 +52,20 @@ public class PigMainActivity extends GameMainActivity {
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
         defaultConfig.addPlayer("Computer", 1); // player 2: a computer player
         defaultConfig.setRemoteData("Remote Human Player", "", 0);
+
+
+
+
+        // Checkpoint 5 below
+
+
+        /**
+        ImageButton die = (ImageButton)findViewById(R.id.dieButton);
+        die.setOnClickListener();
+
+        Button hold =  (Button)findViewById(R.id.holdButton);
+        hold.setOnClickListener();
+        */
 
         return defaultConfig;
     }//createDefaultConfig
