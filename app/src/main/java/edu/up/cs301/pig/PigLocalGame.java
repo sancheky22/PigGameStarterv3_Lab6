@@ -47,37 +47,44 @@ public class PigLocalGame extends LocalGame {
      */
     @Override
     protected boolean makeMove(GameAction action) {
-        if (action instanceof PigHoldAction){
-            if(ourGameState.getPlayerId() == 0) {
+        if (action instanceof PigHoldAction) {
+            if (ourGameState.getPlayerId() == 1) {
+                ourGameState.setPlayer1Score(ourGameState.getPlayer1Score() + ourGameState.getRunningScore());
+                ourGameState.setRunningScore(0);
+            } else {
                 ourGameState.setPlayer0Score(ourGameState.getPlayer0Score() + ourGameState.getRunningScore());
+                ourGameState.setRunningScore(0);
+            }
+
+            if (ourGameState.getPlayerId() == 1) {
+                ourGameState.setPlayerId(0);
+            } else {
                 ourGameState.setPlayerId(1);
             }
-            else if(ourGameState.getPlayerId() == 1){
-                ourGameState.setPlayer1Score(ourGameState.getPlayer1Score() + ourGameState.getRunningScore());
-                ourGameState.setPlayerId(0);
-            }
-            ourGameState.setRunningScore(0);
             return true;
-        }
-        if (action instanceof PigRollAction){
-            int randNum = (int) (Math.random() * 6) + 1;
-            if (randNum != 1){
-                ourGameState.setRunningScore(ourGameState.getRunningScore() + randNum);
-            }
-            else {
+
+        } else if (action instanceof PigRollAction) {
+
+
+            double rand = (Math.random() * ((6 - 1) + 1)) + 1;
+            int random = (int) rand;
+            ourGameState.setDieValue(random);
+
+            if (ourGameState.getDieValue() != 1) {
+                ourGameState.setRunningScore(ourGameState.getRunningScore() + ourGameState.getDieValue());
+            } else if (ourGameState.getDieValue() == 1) {
                 ourGameState.setRunningScore(0);
-                if(ourGameState.getPlayerId() == 0){
+                if (ourGameState.getPlayerId() == 1) {
+                    ourGameState.setPlayerId(0);
+                } else {
                     ourGameState.setPlayerId(1);
                 }
-                else{
-                    ourGameState.setPlayerId(0);
-                }
-                return true;
             }
+            return true;
         }
-        return false;
 
-    }//makeMove
+        return false;
+    }
 
     /**
      * send the updated state to a given player
@@ -100,9 +107,9 @@ public class PigLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         if(ourGameState.getPlayer0Score() >= 50){
-            return "Player 0 won with a score of " + ourGameState.getPlayer0Score();
+            return "Player 1 won with a score of " + ourGameState.getPlayer0Score();
         } else if (ourGameState.getPlayer1Score() >= 50){
-            return "Player 1 won with a score of " + ourGameState.getPlayer1Score();
+            return "Player 2 won with a score of " + ourGameState.getPlayer1Score();
         }
         return null;
     }
